@@ -1,0 +1,12 @@
+public class AssignmentOne {
+    public static void main(String[] args) {
+        HealthProfessional hp1 = new HealthProfessional(1, "Dr. Sergey Bromberg ", "FRACGP");
+        hp1.printDetails();
+        HealthProfessional hp2 = new HealthProfessional(2, "Dr. Justin Wong ", "MBBS");
+        hp2.printDetails();
+        HealthProfessional hp3 = new HealthProfessional(3, "Dr. Nora Sadek ", "MRCGP");
+        hp3.printDetails();
+        HealthProfessional hp4 = new HealthProfessional(4, "Dr. Valerie Tan ", "BSc (Hons)");
+        hp4.printDetails();
+    }
+}
