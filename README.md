@@ -1,2 +1,2 @@
 # OOP
-I will upload each part of the added code as a text document in GitHub and then finally the final code!
+I will upload the added code from each part of the task as a text document in GitHub and then finally upload the final code!
