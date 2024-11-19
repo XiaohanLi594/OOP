@@ -1,0 +1,45 @@
+class GeneralPractitioner extends HealthProfessional
+{
+    private String specialty;
+
+    public GeneralPractitioner()
+    {
+        super();
+        this.specialty = "General Practice";
+    }
+
+    public GeneralPractitioner(int id, String name, String description, String specialty)
+    {
+        super(id, name, description);
+        this.specialty = specialty;
+    }
+
+    @Override
+    public void printDetails()
+    {
+        System.out.printf("The health professional details are: Type: General Practitioner, ID: %d, Name: %s, Description: %s, Specialty: %s%n", getId(), getName(), getDescription(), specialty);
+    }
+}
+
+class OtherHealthProfessional extends HealthProfessional
+{
+    private String professionType;
+
+    public OtherHealthProfessional()
+    {
+        super();
+        this.professionType = "Unknown";
+    }
+
+    public OtherHealthProfessional(int id, String name, String description, String professionType)
+    {
+        super(id, name, description);
+        this.professionType = professionType;
+    }
+
+    @Override
+    public void printDetails()
+    {
+        System.out.printf("The health professional details are: Type: Other Health Professional, ID: %d, Name: %s, Description: %s, Profession Type: %s%n", getId(), getName(), getDescription(), professionType);
+    }
+}
