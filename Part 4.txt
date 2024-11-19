@@ -1,0 +1,34 @@
+//Part 4
+class Appointment
+{
+    private String reservationName;
+    private String reservationNumber;
+    private String reservationTime;
+    private HealthProfessional appointmentDoctor;
+
+    public Appointment()
+    {
+        this.reservationName = "Unknown";
+        this.reservationNumber = "1234567890";
+        this.reservationTime = "09:00";
+        this.appointmentDoctor = null;
+    }
+
+    public Appointment(String reservationName, String reservationNumber, String reservationTime, HealthProfessional appointmentDoctor)
+    {
+        this.reservationName = reservationName;
+        this.reservationNumber = reservationNumber;
+        this.reservationTime = reservationTime;
+        this.appointmentDoctor = appointmentDoctor;
+    }
+
+    public void printAppointmentDetails()
+    {
+        System.out.printf("Reservation Name: %s, Phone: %s, Preferred Time: %s%n", reservationName, reservationNumber, reservationTime);
+        if (appointmentDoctor != null) {
+            System.out.print("Appointment Information for Doctors: ");
+            appointmentDoctor.printDetails();
+        } else {
+            System.out.println("Appointment doctor not selected.");
+        }
+    }
