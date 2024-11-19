@@ -1,0 +1,15 @@
+//Part 3
+        HealthProfessional gp1 = new GeneralPractitioner(1, "Dr. Sergey Bromberg", "FRACGP MBBS (VIC)", "General Practitioner");
+        HealthProfessional gp2 = new GeneralPractitioner(2, "Dr. Justin Wong", "MBBS", "Pediatrician");
+        HealthProfessional gp3 = new GeneralPractitioner(3, "Dr. Emily Chen", "MD", "Physicians");
+
+        HealthProfessional ohp1 = new OtherHealthProfessional(4, "Dr. Nora Sadek", "MRCGP", "Surgeon");
+        HealthProfessional ohp2 = new OtherHealthProfessional(5, "Dr. Valerie Tan", "BSc (Hons) MBBS", "Clinicians");
+
+        gp1.printDetails();
+        gp2.printDetails();
+        gp3.printDetails();
+        System.out.println("------------------------------");
+        ohp1.printDetails();
+        ohp2.printDetails();
+        System.out.println("------------------------------");
