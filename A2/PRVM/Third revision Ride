@@ -1,0 +1,139 @@
+package PRVM;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Comparator;
+
+public class Ride implements RideInterface {
+    private String rideName;
+    private int heightRequirement;
+    private Employee employee;
+    private boolean isOpen;
+    private LinkedList<Visitor> queue; 
+    private List<Visitor> rideHistory; 
+
+    public Ride(String rideName, int heightRequirement, Employee employee, boolean isOpen) {
+        this.rideName = rideName;
+        this.heightRequirement = heightRequirement;
+        this.employee = employee;
+        this.isOpen = isOpen;
+        this.queue = new LinkedList<>();
+        this.rideHistory = new LinkedList<>();
+    }
+
+    @Override
+    public void addVisitorToQueue(Visitor visitor) {
+        if (visitor != null) {
+            queue.add(visitor);
+            System.out.println(visitor.getFirstName() + " has been added to the queue for " + rideName + ".");
+        } else {
+            System.out.println("Failed to add visitor: visitor is null.");
+        }
+    }
+
+    @Override
+    public void removeVisitorFromQueue(Visitor visitor) {
+        if (visitor != null) {
+            if (queue.remove(visitor)) {
+                System.out.println(visitor.getFirstName() + " has been removed from the queue for " + rideName + ".");
+            } else {
+                System.out.println(visitor.getFirstName() + " is not in the queue.");
+            }
+        } else {
+            System.out.println("Failed to remove visitor: visitor is null.");
+        }
+    }
+
+    @Override
+    public void printQueue() {
+        if (queue.isEmpty()) {
+            System.out.println("The queue for " + rideName + " is empty.");
+        } else {
+            System.out.println("Current queue for " + rideName + ":");
+            for (Visitor visitor : queue) {
+                System.out.println(visitor.getFirstName() + " " + visitor.getLastName());
+            }
+        }
+    }
+
+    @Override
+    public void runOneCycle() {
+        int maxCapacity = 2; 
+        int count = 0;
+        while (!queue.isEmpty() && count < maxCapacity) {
+            Visitor visitor = queue.remove();
+            rideHistory.add(visitor);
+            System.out.println(visitor.getFirstName() + " is riding " + rideName + ".");
+            count++;
+        }
+    }
+
+    @Override
+    public void addVisitorToHistory(Visitor visitor) {
+        if (visitor != null) {
+            rideHistory.add(visitor);
+            System.out.println(visitor.getFirstName() + " has been added to ride history.");
+        } else {
+            System.out.println("Failed to add visitor to history: visitor is null.");
+        }
+    }
+
+    @Override
+    public boolean checkVisitorFromHistory(Visitor visitor) {
+        return visitor != null && rideHistory.contains(visitor);
+    }
+
+    @Override
+    public int numberOfVisitors() {
+        return rideHistory.size();
+    }
+
+    @Override
+    public void printRideHistory() {
+        if (rideHistory.isEmpty()) {
+            System.out.println("Ride history is empty.");
+        } else {
+            System.out.println("Ride history:");
+            for (Visitor visitor : rideHistory) {
+                System.out.println(visitor.getFirstName() + " " + visitor.getLastName());
+            }
+        }
+    }
+
+    public void sortRideHistory(Comparator<Visitor> comparator) {
+        rideHistory.sort(comparator);
+    }
+
+    // Getter 和 Setter 方法
+    public String getRideName() {
+        return rideName;
+    }
+
+    public void setRideName(String rideName) {
+        this.rideName = rideName;
+    }
+
+    public int getHeightRequirement() {
+        return heightRequirement;
+    }
+
+    public void setHeightRequirement(int heightRequirement) {
+        this.heightRequirement = heightRequirement;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
+}
