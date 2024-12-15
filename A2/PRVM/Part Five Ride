@@ -1,0 +1,220 @@
+package PRVM;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class Ride implements RideInterface
+{
+    private String rideName;
+    private int heightRequirement;
+    private Employee employee;
+    private boolean isOpen;
+    private LinkedList<Visitor> queue;
+    private LinkedList<Visitor> rideHistory;
+
+    private int maxRider;
+    private int numOfCycles;
+
+    public Ride(String rideName, int heightRequirement, Employee employee, boolean isOpen, int maxRider)
+    {
+        this.rideName = rideName;
+        this.heightRequirement = heightRequirement;
+        this.employee = employee;
+        this.isOpen = isOpen;
+        this.queue = new LinkedList<>();
+        this.rideHistory = new LinkedList<>();
+        this.maxRider = maxRider; 
+        this.numOfCycles = 0; 
+    }
+
+    @Override
+    public void addVisitorToQueue(Visitor visitor)
+    {
+        if (visitor != null)
+        {
+            queue.add(visitor);
+            System.out.println(visitor.getFirstName() + " has been added to the queue for " + rideName + ".");
+        }
+        else
+        {
+            System.out.println("Failed to add visitor: visitor is null.");
+        }
+    }
+
+    @Override
+    public void removeVisitorFromQueue(Visitor visitor)
+    {
+        if (visitor != null)
+        {
+            if (queue.remove(visitor))
+            {
+                System.out.println(visitor.getFirstName() + " has been removed from the queue for " + rideName + ".");
+            }
+            else
+            {
+                System.out.println(visitor.getFirstName() + " is not in the queue.");
+            }
+        }
+        else
+        {
+            System.out.println("Failed to remove visitor: visitor is null.");
+        }
+    }
+
+    @Override
+    public void printQueue()
+    {
+        if (queue.isEmpty())
+        {
+            System.out.println("The queue for " + rideName + " is empty.");
+        }
+        else
+        {
+            System.out.println("Current queue for " + rideName + ":");
+            for (Visitor visitor : queue)
+            {
+                System.out.println(visitor.getFirstName() + " " + visitor.getLastName());
+            }
+        }
+    }
+
+    @Override
+    public void runOneCycle()
+    {
+        if (employee == null)
+        {
+            System.out.println("Cannot run the ride because no operator is assigned.");
+            return;
+        }
+        if (queue.isEmpty())
+        {
+            System.out.println("Cannot run the ride because there are no visitors in the queue.");
+            return;
+        }
+
+        int count = Math.min(maxRider, queue.size());
+        for (int i = 0; i < count; i++)
+        {
+            Visitor visitor = queue.remove();
+            addVisitorToHistory(visitor);
+            System.out.println(visitor.getFirstName() + " is riding " + rideName + ".");
+        }
+        numOfCycles++;
+        System.out.println("Cycle completed. Total cycles run: " + numOfCycles);
+    }
+
+    @Override
+    public void addVisitorToHistory(Visitor visitor)
+    {
+        if (visitor != null)
+        {
+            rideHistory.add(visitor);
+            System.out.println(visitor.getFirstName() + " has been added to ride history.");
+        }
+        else
+        {
+            System.out.println("Failed to add visitor to history: visitor is null.");
+        }
+    }
+
+    @Override
+    public boolean checkVisitorFromHistory(Visitor visitor)
+    {
+        if (visitor != null)
+        {
+            boolean exists = rideHistory.contains(visitor);
+            System.out.println(visitor.getFirstName() + " exists in ride history: " + exists);
+            return exists;
+        }
+        System.out.println("Failed to check visitor: visitor is null.");
+        return false;
+    }
+
+    @Override
+    public int numberOfVisitors()
+    {
+        int count = rideHistory.size();
+        System.out.println("Number of visitors in ride history: " + count);
+        return count;
+    }
+
+    @Override
+    public void printRideHistory()
+    {
+        if (rideHistory.isEmpty())
+        {
+            System.out.println("Ride history is empty.");
+        }
+        else
+        {
+            System.out.println("Ride history:");
+            Iterator<Visitor> iterator = rideHistory.iterator();
+            while (iterator.hasNext()) {
+                Visitor visitor = iterator.next();
+                System.out.println(visitor.getFirstName() + " " + visitor.getLastName());
+            }
+        }
+    }
+
+    public void sortRideHistory()
+    {
+        Collections.sort(rideHistory, new VisitorComparator());
+        System.out.println("Ride history has been sorted.");
+    }
+
+    public String getRideName()
+    {
+        return rideName;
+    }
+
+    public void setRideName(String rideName)
+    {
+        this.rideName = rideName;
+    }
+
+    public int getHeightRequirement()
+    {
+        return heightRequirement;
+    }
+
+    public void setHeightRequirement(int heightRequirement)
+    {
+        this.heightRequirement = heightRequirement;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+
+    public boolean isOpen()
+    {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open)
+    {
+        isOpen = open;
+    }
+
+    public int getMaxRider()
+    {
+        return maxRider;
+    }
+
+    public void setMaxRider(int maxRider)
+    {
+        this.maxRider = maxRider;
+    }
+
+    public int getNumOfCycles()
+    {
+        return numOfCycles;
+    }
+}
