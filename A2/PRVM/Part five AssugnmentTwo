@@ -1,0 +1,22 @@
+public void partFive()
+    {
+        System.out.println("Executing Part Five");
+
+        Ride rollerCoaster = new Ride("Roller Coaster", 120, new Employee("John", "Doe", 30, "E001", "Operator", 30000), true, 3);
+
+        for (int i = 1; i <= 10; i++)
+        {
+            rollerCoaster.addVisitorToQueue(new Visitor("Visitor", "No" + i, 20 + i, "V00" + i, i));
+        }
+
+        System.out.println("Visitors in the queue:");
+        rollerCoaster.printQueue();
+
+        rollerCoaster.runOneCycle();
+
+        System.out.println("The queue after running a cycle:");
+        rollerCoaster.printQueue();
+
+        System.out.println("Visitors in the collection:");
+        rollerCoaster.printRideHistory();
+    }
