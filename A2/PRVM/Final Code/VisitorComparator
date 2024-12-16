@@ -1,0 +1,28 @@
+package PRVM;
+
+import java.util.Comparator;
+
+public class VisitorComparator implements Comparator<Visitor>
+{
+    @Override
+    public int compare(Visitor v1, Visitor v2)
+    {
+
+        // First compare based on number of visits
+        int visitCountComparison = Integer.compare(v1.getVisitCount(), v2.getVisitCount());
+        if (visitCountComparison != 0)
+        {
+            return visitCountComparison;
+        }
+
+        // If the number of visits is the same, compare by name
+        int firstNameComparison = v1.getFirstName().compareTo(v2.getFirstName());
+        if (firstNameComparison != 0)
+        {
+            return firstNameComparison;
+        }
+
+        // If the first name is also the same, the comparison is based on the last name
+        return v1.getLastName().compareTo(v2.getLastName());
+    }
+}
