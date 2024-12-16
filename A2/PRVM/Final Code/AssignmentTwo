@@ -1,0 +1,161 @@
+package PRVM;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AssignmentTwo
+{
+    public static void main(String[] args)
+    {
+        AssignmentTwo assignment = new AssignmentTwo();
+        assignment.partThree();
+        assignment.partFourA();
+        assignment.partFourB();
+        assignment.partFive();
+        assignment.partSix();
+        assignment.partSeven();
+    }
+
+    private Ride createRollerCoaster()
+    {
+        return new Ride("Roller Coaster", 120, new Employee("John", "Doe", 30, "E001", "Operator", 30000), true, 4);
+    }
+
+    public void partThree()
+    {
+        System.out.println("Executing Part Three");
+        Ride rollerCoaster = createRollerCoaster();
+
+        // Add visitors to the queue
+        rollerCoaster.addVisitorToQueue(new Visitor("Jack", "Li", 25, "V001", 1));
+        rollerCoaster.addVisitorToQueue(new Visitor("Sharon", "Li", 22, "V002", 2));
+        rollerCoaster.addVisitorToQueue(new Visitor("Benny", "Li", 28, "V003", 3));
+        rollerCoaster.addVisitorToQueue(new Visitor("Leo", "Li", 20, "V004", 4));
+        rollerCoaster.addVisitorToQueue(new Visitor("Nehemia", "Li", 24, "V005", 5));
+
+        // Remove the specified visitor
+        rollerCoaster.removeVisitorFromQueue(new Visitor("Sharon", "Li", 22, "V002", 2));
+
+        // Print the current queue
+        rollerCoaster.printQueue();
+    }
+
+    public void partFourA()
+    {
+        System.out.println("==================================");
+        System.out.println("Executing Part Four A");
+        Ride rollerCoaster = createRollerCoaster();
+
+        // Add visitors to history
+        rollerCoaster.addVisitorToHistory(new Visitor("Tom", "Liu", 35, "V006", 1));
+        rollerCoaster.addVisitorToHistory(new Visitor("Sheryl", "Li", 30, "V007", 2));
+        rollerCoaster.addVisitorToHistory(new Visitor("Ben", "Liu", 40, "V008", 3));
+        rollerCoaster.addVisitorToHistory(new Visitor("David", "Li", 45, "V009", 4));
+        rollerCoaster.addVisitorToHistory(new Visitor("Jason", "Liu", 50, "V010", 5));
+
+        // Check if the specified visitor is in the history
+        boolean hasVisitor = rollerCoaster.checkVisitorFromHistory(new Visitor("David", "Liu", 45, "V009", 4));
+        System.out.println("Visitor exists in history: " + hasVisitor);
+
+        // Print the number of visitors
+        rollerCoaster.numberOfVisitors();
+
+        // Print ride history
+        rollerCoaster.printRideHistory();
+    }
+
+    public void partFourB()
+    {
+        System.out.println("==================================");
+        System.out.println("Executing Part Four B");
+        Ride rollerCoaster = createRollerCoaster();
+
+        // Create a list of visitors and add to history
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("Alice", "Li", 30, "V001", 5));
+        visitors.add(new Visitor("Bob", "Liu", 22, "V002", 2));
+        visitors.add(new Visitor("Charlie", "Li", 28, "V003", 3));
+        visitors.add(new Visitor("Alice", "Qi", 25, "V004", 1));
+        visitors.add(new Visitor("David", "Qi", 35, "V005", 4));
+
+        for (Visitor visitor : visitors)
+        {
+            rollerCoaster.addVisitorToHistory(visitor);
+        }
+
+        // Print unsorted history
+        System.out.println("Unsorted ride history:");
+        rollerCoaster.printRideHistory();
+
+        // Sort history
+        rollerCoaster.sortRideHistory();
+
+        // Print the sorted history
+        System.out.println("Sorted ride history:");
+        rollerCoaster.printRideHistory();
+    }
+
+
+    public void partFive()
+    {
+        System.out.println("==================================");
+        System.out.println("Executing Part Five");
+
+        Ride rollerCoaster = new Ride("Roller Coaster", 120, new Employee("John", "Doe", 30, "E001", "Operator", 30000), true, 3);
+
+        // Add visitors to the queue
+        for (int i = 1; i <= 10; i++)
+        {
+            rollerCoaster.addVisitorToQueue(new Visitor("Visitor", "No" + i, 20 + i, "V00" + i, i));
+        }
+
+        // Print the visitors in the queue
+        System.out.println("Visitors in the queue:");
+        rollerCoaster.printQueue();
+
+        // Run a cycle
+        rollerCoaster.runOneCycle();
+
+        // Print the queue after the run cycle
+        System.out.println("The queue after running a cycle:");
+        rollerCoaster.printQueue();
+
+        // Print visitors from ride history
+        System.out.println("Visitors in the collection:");
+        rollerCoaster.printRideHistory();
+    }
+
+    public void partSix()
+    {
+        System.out.println("==================================");
+        System.out.println("Executing Part Six");
+        Ride rollerCoaster = createRollerCoaster();
+
+        // Add visitors to history
+        rollerCoaster.addVisitorToHistory(new Visitor("Alice", "Qi", 25, "V001", 1));
+        rollerCoaster.addVisitorToHistory(new Visitor("Bob", "Qi", 30, "V002", 2));
+        rollerCoaster.addVisitorToHistory(new Visitor("Charlie", "Qi", 28, "V003", 3));
+        rollerCoaster.addVisitorToHistory(new Visitor("Diana", "Qi", 22, "V004", 4));
+        rollerCoaster.addVisitorToHistory(new Visitor("Ethan", "Qi", 35, "V005", 5));
+
+        // Export ride history to CSV file
+        rollerCoaster.exportRideHistory("ride_history.csv");
+    }
+
+    public void partSeven()
+    {
+        System.out.println("==================================");
+        System.out.println("Executing Part Seven");
+
+        Ride rollerCoaster = createRollerCoaster();
+
+        // Import ride history from CSV file
+        rollerCoaster.importRideHistory("ride_history.csv");
+
+        // Print the number of visitors imported
+        System.out.println("Number of visitors imported: " + rollerCoaster.numberOfVisitors());
+
+        // Print the visitors in the queue
+        rollerCoaster.printQueue();
+    }
+}
