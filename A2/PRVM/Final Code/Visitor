@@ -1,0 +1,47 @@
+package PRVM;
+
+public class Visitor extends Person
+{
+    private String visitorId;
+    private int visitCount;
+
+    public Visitor() {}
+
+    public Visitor(String firstName, String lastName, int age, String visitorId, int visitCount)
+    {
+        super(firstName, lastName, age);
+        this.visitorId = visitorId;
+        this.visitCount = visitCount;
+    }
+
+    public Visitor(String firstName, String lastName)
+    {
+        super(firstName, lastName, 0);
+        this.visitorId = "DefaultVisitorId";// Default Visitor ID
+        this.visitCount = 0;// Default number of visits
+    }
+
+    public String getVisitorId()
+    {
+        return visitorId;
+    }
+
+    public void setVisitorId(String visitorId)
+    {
+        this.visitorId = visitorId;
+    }
+
+    public int getVisitCount()
+    {
+        return visitCount;
+    }
+
+    public void setVisitCount(int visitCount)
+    {
+        this.visitCount = visitCount;
+    }
+
+    public String toCSV() {
+        return getFirstName() + "," + getLastName() + "," + getAge() + "," + visitorId + "," + visitCount;
+    }
+}
